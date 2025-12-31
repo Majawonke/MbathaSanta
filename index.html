@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secret Santa Picker</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
       display: flex;
@@ -77,7 +76,6 @@
       color: #27ae60;
     }
 
-    /* Snowflakes */
     .snowflake {
       color: #fff;
       font-size: 1.5em;
@@ -94,7 +92,7 @@
 </head>
 <body>
 
-  <h2>🎄 Mbatha Secret Santa 🎁</h2>
+  <h1>🎄 Secret Santa 🎁</h1>
   <p>Select your name:</p>
   <select id="user-name">
     <option value="" disabled selected>-- Choose your name --</option>
@@ -106,6 +104,13 @@
     <div id="name-buttons"></div>
     <p id="selected"></p>
   </div>
+
+  <!-- Hidden Formspree form -->
+  <form id="email-form" action="https://formspree.io/f/xnjqeyod" method="POST" style="display:none;">
+    <input type="text" name="user_name" id="form-user-name">
+    <input type="text" name="picked_name" id="form-picked-name">
+    <button type="submit" id="form-submit">Send</button>
+  </form>
 
   <script>
     // Snowflakes
@@ -165,6 +170,11 @@
           hasPicked = true;
           selectedDisplay.textContent = `🎁 Utsengela: ${name} 🎁`;
           renderButtons();
+
+          // Submit to Formspree
+          document.getElementById('form-user-name').value = userName;
+          document.getElementById('form-picked-name').value = name;
+          document.getElementById('form-submit').click();
         };
         container.appendChild(btn);
       });
@@ -173,3 +183,4 @@
 
 </body>
 </html>
+
